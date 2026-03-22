@@ -1,0 +1,19 @@
+{
+  "name": "minecraft-mace-auto-farm",
+  "version": "1.0.0",
+  "description": "Automatically produce mace in minecraft.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "keywords": [
+    "minecraft",
+    "mace",
+    "node"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "TgkRuobin",
+  "license": "MIT"
+}

@@ -1,0 +1,32 @@
+{
+	"cmd_delay": 1000,
+	"trial_level": 1,
+	"bot_prefix": "bot_",
+	"bots": [
+		{
+			"name": "drinker",
+			"pos": [10, 10, -10],
+			"actions": [
+				"look down",
+				"use continuous"
+			]
+		},
+		{
+			"name": "clicker",
+			"pos": [10, 15, -10],
+			"actions": [
+				"look down",
+				"use interval ${trial_interval}"
+			]
+		}
+	],
+	"AFK": {
+		"name": "genkey",
+		"num": 128,
+		"pos": [
+			[1, 1, 1],
+			[1, 1, 3],
+			[1, 1, 5]
+		]
+	}
+}
