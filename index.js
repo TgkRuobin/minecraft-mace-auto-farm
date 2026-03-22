@@ -1,7 +1,8 @@
 const fs = require("fs");
 const readline = require("readline");
 
-const API_URL = "http://localhost:3002/api/command"; // 修改为你的接口地址
+const config = loadConfig();
+const API_URL = "http://192.168.0.3:3002/api/command"; // 修改为你的接口地址
 
 // =========================
 // 工具函数
@@ -25,7 +26,8 @@ async function sendCommandRaw(command) {
         const res = await fetch(API_URL, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "x-access-key": config.access_key,
             },
             body: JSON.stringify({ command })
         });
@@ -263,9 +265,6 @@ async function askMode() {
 // =========================
 
 async function main() {
-
-    const config =
-        loadConfig();
 
     const mode =
         await askMode();
