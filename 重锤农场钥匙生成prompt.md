@@ -47,6 +47,7 @@ HTTP POST /api/command
 			"pos": [10, 15, -10],
 			"actions": [
 				"look down",
+				"use once",
 				"use interval ${trial_interval}"	// 对于actions中的`${trial_interval}`字符串需要特殊替换，替换为20 * 60 * 15 * trial_level的实际计算结果
 			]
 		}
