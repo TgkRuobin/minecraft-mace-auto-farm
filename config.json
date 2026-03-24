@@ -1,7 +1,7 @@
 {
-	"access_key": "",
+	"access_key": "R3233bffssd",
 	"cmd_delay": 1000,
-	"trial_level": 1,
+	"trial_level": 2,
 	"bot_prefix": "bot_",
 	"bots": [
 		{
@@ -29,6 +29,22 @@
 			[-1433, -21,-2568],
 			[-1435, -21,-2568],
 			[-1437, -21,-2568]
+		]
+	},
+	"exchange": {
+		"clicker_bot_name": "clicker",
+		"clicker_bot_pos": [-1440, 8, -2534],
+		"user_bot_name": "user",
+		"user_bot_pos": [-1440, 3, -2534],
+		"pre_actions": [
+			"player ${clicker} look down"
+		],
+		"cycle": 4,
+		"loop_actions": [
+			"player ${clicker} use once",
+			"player ${user} look south",
+			"player ${user} use once",
+			"player ${user} kill"
 		]
 	}
 }

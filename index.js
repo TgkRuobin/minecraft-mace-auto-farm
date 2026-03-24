@@ -232,6 +232,61 @@ async function clearMode(config) {
 }
 
 // =========================
+// 兑换模式
+// =========================
+
+async function exchangeMode(config) {
+
+    const exec =
+        await createCommandExecutor(
+            config.cmd_delay
+        );
+
+    const bot_clicker_name = config.exchange.clicker_bot_name;
+    const bot_clicker_fullname = `${config.bot_prefix}${bot_clicker_name}`;
+    const bot_clicker_pos = config.exchange.clicker_bot_pos;
+
+    
+    
+    const bot_user_pos = config.exchange.user_bot_pos;
+
+    const preActions = config.exchange.pre_actions.map(a => {
+        return a.replace('${clicker}', bot_clicker_fullname);
+    });
+
+    const cycle = config.exchange.cycle;
+
+    await exec(`player ${bot_clicker_name} spawn at ${bot_clicker_pos.join(' ')} facing 0 0 in minecraft:overworld in survival`);
+    for(const action of preActions) {
+        await exec(action);
+    }
+
+    for (let i = 0;i < cycle;i++) {
+        console.log(`第 ${i + 1} 轮循环♻️开始`);
+        for (let j = 0;j < 128;j++) {
+            const bot_user_name = `${config.exchange.user_bot_name}${j + 1}`;
+            const bot_user_fullname = `${config.bot_prefix}${bot_user_name}`;
+
+            await exec(`player ${bot_user_name} spawn at ${bot_user_pos.join(' ')} facing 0 0 in minecraft:overworld in survival`);
+            await sleep(5000);
+
+            const loopActions = config.exchange.loop_actions.map(a => {
+                return a.replace('${clicker}', bot_clicker_fullname)
+                        .replace('${user}', bot_user_fullname);
+            });
+
+            for(const action of loopActions) {
+                await exec(action);
+            }
+
+            await sleep(6000);
+        }
+    }
+
+    await exec(`player ${bot_clicker_fullname} kill`);
+}
+
+// =========================
 // CLI
 // =========================
 
@@ -248,6 +303,7 @@ async function askMode() {
         console.log("");
         console.log("1 = 启动钥匙生成");
         console.log("2 = 清除钥匙生成");
+        console.log("3 = 钥匙兑换模式")
         console.log("");
 
         rl.question(
@@ -276,6 +332,10 @@ async function main() {
     } else if (mode === "2") {
 
         await clearMode(config);
+
+    } else if (mode === "3") {
+
+        await exchangeMode(config);
 
     } else {
 
